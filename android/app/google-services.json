@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "706818307002",
+    "project_id": "emasik-userapp",
+    "storage_bucket": "emasik-userapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:706818307002:android:cdda9b9bcf9a8bcd22e383",
+        "android_client_info": {
+          "package_name": "com.masik.karmyogi"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBmHDJ9_RsYdgJZRlg5lHq7hjO7AoWW7dQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
