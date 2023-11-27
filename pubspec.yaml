@@ -38,11 +38,10 @@ dependencies:
   carousel_slider: ^4.1.1
   http: ^0.13.4
   flutter_cached_pdfview: ^0.4.2
-  audioplayers: ^5.2.0
+  audioplayers:
   audio_service: ^0.18.12
   just_audio: ^0.9.35
   fluttertoast: ^8.0.9
-  alarm: ^2.1.1
   assets_audio_player: ^3.0.4
   shared_preferences: ^2.0.8
   connectivity_plus: ^4.0.0
@@ -57,7 +56,6 @@ dependencies:
   google_maps_flutter: ^2.2.0
   geolocator: ^10.0.1
   file_picker: ^5.5.0
-
   shimmer: ^3.0.0
   geocoding: ^2.0.5
   razorpay_flutter: ^1.2.7
@@ -97,9 +95,7 @@ dependencies:
   device_info_plus: ^9.1.0
   image_cropper: ^4.0.0
   external_path: ^1.0.3
-
-
-
+  alarm: ^2.1.1
 
 
 dev_dependencies:

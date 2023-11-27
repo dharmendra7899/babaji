@@ -1,4 +1,6 @@
 import 'dart:io';
+
+import 'package:alarm/alarm.dart';
 import 'package:eshop/Helper/Color.dart';
 import 'package:eshop/Helper/Constant.dart';
 import 'package:eshop/Provider/CartProvider.dart';
@@ -9,10 +11,8 @@ import 'package:eshop/Provider/HomeProvider.dart';
 import 'package:eshop/Provider/OfferImagesProvider.dart';
 import 'package:eshop/Provider/ProductDetailProvider.dart';
 import 'package:eshop/Provider/ProductProvider.dart';
-
 import 'package:eshop/Provider/UserProvider.dart';
 import 'package:eshop/Provider/pushNotificationProvider.dart';
-
 import 'package:eshop/Screen/Splash.dart';
 import 'package:eshop/ui/styles/themedata.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -24,23 +24,20 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'Provider/MyFatoraahPaymentProvider.dart';
-import 'app/Demo_Localization.dart';
-import 'Helper/PushNotificationService.dart';
 import 'Helper/Session.dart';
 import 'Helper/String.dart';
-
-import 'Provider/Theme.dart';
+import 'Provider/MyFatoraahPaymentProvider.dart';
 import 'Provider/SettingProvider.dart';
+import 'Provider/Theme.dart';
 import 'Provider/order_provider.dart';
 import 'Screen/Dashboard.dart';
+import 'app/Demo_Localization.dart';
 import 'firebase_options.dart';
-
 
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  await Alarm.init(showDebugLogs: true);
   if (Firebase.apps.isNotEmpty) {
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
@@ -53,11 +50,11 @@ void main() async {
   initializedDownload();
   HttpOverrides.global = MyHttpOverrides();
 
-
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.transparent, // status bar color
   ));
   SharedPreferences prefs = await SharedPreferences.getInstance();
+  await Alarm.set(alarmSettings: alarmSettings);
 
   runApp(
     MultiProvider(
@@ -122,6 +119,23 @@ Future<void> initializedDownload() async {
   await FlutterDownloader.initialize(debug: false);
 }
 
+/*morning -   5 am
+afternoon -   12 pm
+evening -   6.45 pm*/
+
+final alarmSettings = AlarmSettings(
+  id: 42,
+  dateTime: DateTime.now(),
+  assetAudioPath: 'assets/audio/babaji.mp3',
+  loopAudio: true,
+  vibrate: true,
+  volumeMax: true,
+  fadeDuration: 3.0,
+  notificationTitle: 'This is the title',
+  notificationBody: 'This is the body',
+  enableNotificationOnKill: true,
+);
+
 class MyApp extends StatefulWidget {
   late SharedPreferences sharedPreferences;
 
@@ -163,7 +177,6 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     dashboardPageState = GlobalKey<HomePageState>();
-
   }
 
   @override
